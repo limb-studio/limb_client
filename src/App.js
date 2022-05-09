@@ -6,7 +6,7 @@ import "primereact/resources/themes/lara-light-indigo/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
 import "/node_modules/primeflex/primeflex.css"
-import DocNew from './DocNew';
+import DocNew from './doc/new/DocNew';
 import { Routes, Route, Link } from "react-router-dom";
 import Home from './Home';
 import AdminPage from './admin/AdminPage';
