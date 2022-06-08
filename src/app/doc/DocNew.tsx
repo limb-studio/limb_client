@@ -1,19 +1,14 @@
 import { Steps } from 'primereact/steps';
 import { useState, useRef } from "react";
 import { Toast } from 'primereact/toast';
-import React, { Fragment } from 'react';
+import React from 'react';
 import DocNewFiles from './DocNewFiles'
+import { DocNewGeneral } from './DocNewGeneral'
 
-function DocNewGeneral() {
-    return (
-        <Fragment>      
-        <div>document</div>
-        </Fragment>  );
-}
 
 function DocNew() {
     const [activeIndex, setActiveIndex] = useState(0);
-    const toast = useRef(null);
+    const toast = useRef<Toast|null>(null);
     const items = [
         {label: 'Документ'},
         {label: 'Файлы'},
@@ -22,9 +17,9 @@ function DocNew() {
         {label: 'Публикация'}
     ];
 
-    function trySetIndex(newIndex) {
+    function trySetIndex(newIndex: number) {
         if (newIndex <= 2) setActiveIndex(newIndex)
-        else toast.current.show({severity:'info', summary:'Не заполнены предыдущие шаги', detail: 'Необходимо заполнить шаги Документ, Файлы и Поручения'});
+        else toast.current?.show({severity:'info', summary:'Не заполнены предыдущие шаги', detail: 'Необходимо заполнить шаги Документ, Файлы и Поручения'});
     }
 
     let currentComponent;
@@ -37,5 +32,5 @@ function DocNew() {
         {currentComponent}
         </div>
     )
-}
-export default DocNew;
+  }
+export {DocNew}

@@ -1,17 +1,16 @@
-import logo from './logo.svg';
-import './App.css';
 import React from 'react';
-import { NavHeader } from './NavHeader';
+import './App.css';
+import { Home } from './Home'
+import { Routes, Route } from "react-router-dom";
+import { NavHeader } from '../components/NavHeader';
 import "primereact/resources/themes/lara-light-indigo/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
 import "/node_modules/primeflex/primeflex.css"
-import DocNew from './doc/new/DocNew';
-import { Routes, Route, Link } from "react-router-dom";
-import Home from './Home';
-import AdminPage from './admin/AdminPage';
-import AdminUsersPage from './admin/users/AdminUsersPage';
-import AdminUserEditPage from './admin/users/AdminUserEditPage';
+import { DocNew } from './doc/DocNew';
+import { AdminPage } from './admin/AdminPage';
+import { AdminUsersPage } from './admin/users/AdminUsersPage';
+import { AdminUserEditPage } from './admin/users/AdminUserEditPage';
 
 function App() {
   return (
@@ -19,8 +18,8 @@ function App() {
       <NavHeader></NavHeader>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="docnewsz" element={<DocNew />} />
-        <Route path="admin" element={<AdminPage />} />
+        <Route path="/docnewsz" element={<DocNew />} />
+        <Route path="/admin" element={<AdminPage />} />
         <Route path="admin/users" element={<AdminUsersPage />} />
         <Route path="admin/users/:id" element={<AdminUserEditPage />} />
       </Routes>

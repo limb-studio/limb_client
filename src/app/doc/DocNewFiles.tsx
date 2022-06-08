@@ -6,14 +6,14 @@ import { Tag } from 'primereact/tag';
 import { useState, useRef } from "react";
 import { Toast } from 'primereact/toast';
 import React, { Fragment } from 'react';
-import axios from 'axios';
+import axios  from 'axios';
 
 function DocNewFiles() {
     const [totalSize, setTotalSize] = useState(0);
-    const toast = useRef(null);
-    const fileUploadRef = useRef(null);
+    const toast = useRef<Toast|null>(null);
+    const fileUploadRef =useRef<FileUpload|null>(null);
 
-    const onTemplateSelect = (e) => {
+    const onTemplateSelect = (e:any) => {
         let _totalSize = totalSize;
         Object.keys(e.files).forEach(key => {
             _totalSize += e.files[key].size;
@@ -22,17 +22,17 @@ function DocNewFiles() {
         setTotalSize(_totalSize);
     }
 
-    const onTemplateUpload = (e) => {
+    const onTemplateUpload = (e:any) => {
         let _totalSize = 0;
-        e.files.forEach(file => {
+        e.files.forEach((file:any) => {
             _totalSize += (file.size || 0);
         });
 
         setTotalSize(_totalSize);
-        toast.current.show({ severity: 'info', summary: 'Успешно', detail: 'Файл загружен' });
+        toast.current?.show({ severity: 'info', summary: 'Успешно', detail: 'Файл загружен' });
     }
 
-    const onTemplateRemove = (file, callback) => {
+    const onTemplateRemove = (file:any, callback:any) => {
         setTotalSize(totalSize - file.size);
         callback();
     }
@@ -41,7 +41,7 @@ function DocNewFiles() {
         setTotalSize(0);
     }
 
-    const headerTemplate = (options) => {
+    const headerTemplate = (options:any) => {
         const { className, chooseButton, uploadButton, cancelButton } = options;
         const value = totalSize / 1000000;
         const formatedValue = fileUploadRef && fileUploadRef.current ? fileUploadRef.current.formatSize(totalSize) : '0 B';
@@ -56,7 +56,7 @@ function DocNewFiles() {
         );
     }
 
-    const itemTemplate = (file, props) => {
+    const itemTemplate = (file:any, props:any) => {
         return (
             <div className="flex align-items-center flex-wrap">
                 <div className="flex align-items-center" style={{ width: '40%' }}>
@@ -71,13 +71,13 @@ function DocNewFiles() {
             </div>
         )
     }
-    const filesUploader = (event) => {
-        event.files.forEach(file => {
+    const filesUploader = (event:any) => {
+        event.files.forEach((file:any) => {
             const formData = new FormData();
             formData.append('uploadFile', file, file.name);
             axios.post('http://localhost:3001/file/upload', formData)
         })
-        fileUploadRef.current.clear()
+        fileUploadRef.current?.clear()
     }
 
     const emptyTemplate = () => {
