@@ -3,16 +3,18 @@ import { Toast } from 'primereact/toast';
 import React, { Fragment } from 'react';
 import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
-
+import { UserSelect } from "../../components/UserSelect";
+import { AutoComplete } from "primereact/autocomplete";
+import { InputTextarea } from 'primereact/inputtextarea';
 
 function DocNewGeneral() {
     const toast = useRef(null);
     const [ name, setName ] = useState('');
     const [ serial, setSerial ] = useState('');
-    const [ executor, setExecutor ] = useState('');
+    const [ executor, setExecutor ] = useState({});
     const [ comment, setComment ] = useState('');
     const [ pagesCount, setPagesCount ] = useState('');
-    const [ author, setAuthor ] = useState('');
+    const [ author, setAuthor ] = useState({});
 
     return (
             <div className="card flex flex-column m-3">
@@ -26,11 +28,11 @@ function DocNewGeneral() {
                     <label htmlFor="serial">Номер документа</label>
                 </span>
                 <span className="p-float-label m-3">
-                    <InputText id="executor" className='w-full' value={executor} onChange={(e) => setExecutor(e.target.value)} />
+                    <UserSelect id="executor" className='p-fluid w-full' value={executor} onSelect={(e:any) => {setExecutor(e.value); console.log(e.value.id)}} />
                     <label htmlFor="executor">Исполнитель</label>
                 </span>
                 <span className="p-float-label m-3">
-                    <InputText id="author" className='w-full' value={author} onChange={(e) => setAuthor(e.target.value)} />
+                    <UserSelect id="author" className='p-fluid w-full' value={author} onSelect={(e:any) => setAuthor(e.value)} />
                     <label htmlFor="author">Автор</label>
                 </span>
                 <span className="p-float-label m-3">
@@ -38,7 +40,7 @@ function DocNewGeneral() {
                     <label htmlFor="pagesCount">Количество страниц</label>
                 </span>
                 <span className="p-float-label m-3">
-                    <InputText id="comment" className='w-full' value={comment} onChange={(e) => setComment(e.target.value)} />
+                    <InputTextarea id="comment" className='w-full' value={comment} onChange={(e) => setComment(e.target.value)} />
                     <label htmlFor="comment">Комментарий</label>
                 </span>
                 <Button label="Создать документ" className='w-15rem align-self-center' icon="pi pi-check" />
